@@ -36,23 +36,6 @@ public class DemoApplication {
 			account1.setRoles(roles1);
 			accountRepository.save(account1);
 
-			Account account2 = new Account();
-			account2.setId(null);
-			account2.setFirstname("Test");
-			account2.setLastname("User");
-			account2.setUsername("tuser");
-			account2.setPassword("password");
-
-			Role role2 = new Role();
-			role2.setName("VISITOR");
-			role2.setId(null);
-
-			Set<Role> roles2 = new HashSet<>();
-			roles2.add(role2);
-
-			account2.setRoles(roles2);
-			accountRepository.save(account2);
-
 			ArrayList<Account> accounts = (ArrayList<Account>) accountRepository.findAllOrderByLastname();
 			for(Account a : accounts) {
 				System.out.println(a.getLastname());
