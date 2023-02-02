@@ -3,6 +3,8 @@ package com.liwanag.demo.controller;
 import com.liwanag.demo.model.Account;
 import com.liwanag.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,25 +17,34 @@ public class AccountController {
     AccountService accountService;
 
     @GetMapping(path="/accounts")
-    public ArrayList<Account> getAllAccounts() {
+    public ResponseEntity getAllAccounts() {
         ArrayList<Account> accounts = accountService.getAllAccounts();
-        return accounts;
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
     @GetMapping(path="/account/{id}")
-    public Account getAccountById(@PathVariable Integer id) {
+    public ResponseEntity getAccountById(@PathVariable Integer id) {
         Optional<Account> account = accountService.getAccountById(id);
-        return account.get();
+        if(account.isPresent()) {
+            return new ResponseEntity<>(account.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping(path="/account")
-    public void createAccount(@RequestBody Account account) {
-        accountService.createAccount(account);
+    public ResponseEntity createAccount(@RequestBody Account account) {
+        try {
+            accountService.createAccount(account);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping(path="/accounts-order-by-lastname")
-    public ArrayList<Account> getAllAccountsOrderByLastname() {
+    public ResponseEntity getAllAccountsOrderByLastname() {
         ArrayList<Account> accounts = accountService.getAllAccountsOrderByLastname();
-        return accounts;
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 }
