@@ -47,4 +47,19 @@ public class AccountController {
         ArrayList<Account> accounts = accountService.getAllAccountsOrderByLastname();
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
+
+    @GetMapping(path="/admin")
+    public String adminPage() {
+        return "admin page";
+    }
+
+    @GetMapping(path="/user")
+    public String userPage() {
+        return "user page";
+    }
+
+    @GetMapping(path="/")
+    public String everybodyAllowedPage() {
+        return "everybody allowed page";
+    }
 }

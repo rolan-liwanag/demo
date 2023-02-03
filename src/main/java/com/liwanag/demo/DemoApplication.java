@@ -17,7 +17,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	CommandLineRunner commandLineRunner(AccountRepository accountRepository) {
 		return args -> {
 			Account account1 = new Account();
@@ -46,6 +46,6 @@ public class DemoApplication {
 				);
 			}
 		};
-	}*/
+	}
 
 }
