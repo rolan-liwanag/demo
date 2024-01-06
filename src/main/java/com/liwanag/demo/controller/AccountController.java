@@ -20,6 +20,7 @@ public class AccountController {
     public ResponseEntity getAllAccounts() {
         System.out.println("example");
         ArrayList<Account> accounts = accountService.getAllAccounts();
+        System.out.println("another line);
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
