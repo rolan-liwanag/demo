@@ -18,6 +18,7 @@ public class AccountController {
 
     @GetMapping(path="/accounts")
     public ResponseEntity getAllAccounts() {
+        System.out.println("example");
         ArrayList<Account> accounts = accountService.getAllAccounts();
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
